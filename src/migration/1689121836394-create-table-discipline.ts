@@ -8,6 +8,8 @@ export class CreateTableDiscipline1689121836394 implements MigrationInterface {
               name VARCHAR(255) NOT NULL,
               user_id INT,
               status_discipline_id INT,
+              date_start DATE,
+              date_end DATE,
               created_at TIMESTAMP DEFAULT now(),
               updated_at TIMESTAMP DEFAULT now(),
               FOREIGN KEY (user_id) REFERENCES public.user(id),
