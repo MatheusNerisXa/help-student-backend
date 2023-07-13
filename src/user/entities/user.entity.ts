@@ -1,4 +1,6 @@
+import { AbsencesEntity } from 'src/absences/entities/absences.entity';
 import { AddressEntity } from 'src/address/entities/address.entity';
+import { DisciplineEntity } from 'src/discipline/entities/discipline.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -33,4 +35,10 @@ export class UserEntity {
 
   @OneToMany(() => AddressEntity, (address) => address.user)
   addresses?: AddressEntity[];
+
+  @OneToMany(() => DisciplineEntity, (discipline) => discipline.user)
+  disciplines: DisciplineEntity[];
+
+  @OneToMany(() => AbsencesEntity, (absences) => absences.user)
+  absences: AbsencesEntity[];
 }

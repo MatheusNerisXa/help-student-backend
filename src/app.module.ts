@@ -11,6 +11,8 @@ import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './guards/roles.guard';
 import { JwtModule } from '@nestjs/jwt';
 import { DisciplineStatusModule } from './discipline-status/discipline-status.module';
+import { AbsencesModule } from './absences/absences.module';
+import { DisciplineModule } from './discipline/discipline.module';
 
 @Module({
   imports: [
@@ -36,6 +38,8 @@ import { DisciplineStatusModule } from './discipline-status/discipline-status.mo
     AuthModule,
     JwtModule,
     DisciplineStatusModule,
+    AbsencesModule,
+    DisciplineModule,
   ],
   controllers: [],
   providers: [{ provide: APP_GUARD, useClass: RolesGuard }],
