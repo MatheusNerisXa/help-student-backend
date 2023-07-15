@@ -1,5 +1,4 @@
 import { DisciplineEntity } from '../entities/discipline.entity';
-
 export class ReturnDisciplines {
   id: number;
   name: string;

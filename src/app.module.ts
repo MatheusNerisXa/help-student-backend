@@ -13,6 +13,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { DisciplineStatusModule } from './discipline-status/discipline-status.module';
 import { AbsencesModule } from './absences/absences.module';
 import { DisciplineModule } from './discipline/discipline.module';
+import { ExamsModule } from './exams/exams.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { DisciplineModule } from './discipline/discipline.module';
     DisciplineStatusModule,
     AbsencesModule,
     DisciplineModule,
+    ExamsModule,
   ],
   controllers: [],
   providers: [{ provide: APP_GUARD, useClass: RolesGuard }],
