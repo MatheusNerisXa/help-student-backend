@@ -14,6 +14,7 @@ import { DisciplineStatusModule } from './discipline-status/discipline-status.mo
 import { AbsencesModule } from './absences/absences.module';
 import { DisciplineModule } from './discipline/discipline.module';
 import { ExamsModule } from './exams/exams.module';
+import { NewsModule } from './news/news.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { ExamsModule } from './exams/exams.module';
     AbsencesModule,
     DisciplineModule,
     ExamsModule,
+    NewsModule,
   ],
   controllers: [],
   providers: [{ provide: APP_GUARD, useClass: RolesGuard }],
