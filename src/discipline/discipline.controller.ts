@@ -11,7 +11,7 @@ export class DisciplineController {
   @Get()
   async findAllAbsences(): Promise<ReturnDisciplines[]> {
     const disciplines: DisciplineEntity[] =
-      await this.disciplineService.findAllAbsences();
+      await this.disciplineService.findAllDisciplines();
     return disciplines.map((discipline) => new ReturnDisciplines(discipline));
   }
 

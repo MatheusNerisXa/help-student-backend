@@ -11,7 +11,7 @@ export class DisciplineService {
     private disciplineRepository: Repository<DisciplineEntity>,
   ) {}
 
-  async findAllAbsences(): Promise<DisciplineEntity[]> {
+  async findAllDisciplines(): Promise<DisciplineEntity[]> {
     const disciplines = await this.disciplineRepository.find();
 
     if (!disciplines || disciplines.length === 0) {
