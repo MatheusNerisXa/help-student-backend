@@ -13,6 +13,7 @@ export class Exam {
 
   @Column({ name: 'registration_start', type: 'date' })
   registrationStart: Date;
+
   @Column({ name: 'registration_end', type: 'date' })
   registrationEnd: Date;
 
@@ -24,4 +25,10 @@ export class Exam {
 
   @Column({ name: 'result_date', type: 'date' })
   resultDate: Date;
+
+  @Column({ nullable: true })
+  image: string;
+
+  @Column({ name: 'link_enrollment', nullable: true })
+  linkEnrollment: string;
 }
