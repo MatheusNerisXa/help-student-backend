@@ -3,8 +3,9 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { CreateUserDto } from './dtos/createUser.dto';
 import { hash } from 'bcrypt';
+import { UpdateUserDto } from './dtos/updateUser.dto';
+import { CreateUserDto } from './dtos/createUser.dto';
 import { UserEntity } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -15,22 +16,31 @@ export class UserService {
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
   ) {}
+
   async createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
-    const user = await this.findUserByEmail(createUserDto.email).catch(
+    const existingUserByEmail = await this.findUserByEmail(
+      createUserDto.email,
+    ).catch(() => undefined);
+
+    if (existingUserByEmail) {
+      throw new BadRequestException('Email is already registered');
+    }
+
+    const existingUserByCpf = await this.findUserByCpf(createUserDto.cpf).catch(
       () => undefined,
     );
 
-    if (user) {
-      throw new BadRequestException('email registered in system');
+    if (existingUserByCpf) {
+      throw new BadRequestException('CPF is already registered');
     }
 
     const saltOrRounds = 10;
-    const passwordhash = await hash(createUserDto.password, saltOrRounds);
+    const passwordHash = await hash(createUserDto.password, saltOrRounds);
 
     return this.userRepository.save({
       ...createUserDto,
       typeUser: 1,
-      password: passwordhash,
+      password: passwordHash,
     });
   }
 
@@ -74,6 +84,67 @@ export class UserService {
     if (!user) {
       throw new NotFoundException(`Email: ${email} Not Found`);
     }
+    return user;
+  }
+
+  async findUserByCpf(cpf: string): Promise<UserEntity | undefined> {
+    return this.userRepository.findOne({
+      where: {
+        cpf,
+      },
+    });
+  }
+
+  async findUserByName(name: string): Promise<UserEntity | undefined> {
+    return this.userRepository.findOne({
+      where: {
+        name,
+      },
+    });
+  }
+
+  async updateUser(
+    userId: number,
+    updateUserDto: UpdateUserDto,
+  ): Promise<UserEntity> {
+    const user = await this.findUserById(userId);
+
+    if (updateUserDto.email && updateUserDto.email !== user.email) {
+      const existingUserWithEmail = await this.findUserByEmail(
+        updateUserDto.email,
+      ).catch(() => undefined);
+      if (existingUserWithEmail && existingUserWithEmail.id !== userId) {
+        throw new BadRequestException('Email is already registered');
+      }
+      user.email = updateUserDto.email;
+    }
+
+    if (updateUserDto.cpf && updateUserDto.cpf !== user.cpf) {
+      const existingUserWithCpf = await this.findUserByCpf(
+        updateUserDto.cpf,
+      ).catch(() => undefined);
+      if (existingUserWithCpf && existingUserWithCpf.id !== userId) {
+        throw new BadRequestException('CPF is already registered');
+      }
+      user.cpf = updateUserDto.cpf;
+    }
+
+    if (updateUserDto.name && updateUserDto.name !== user.name) {
+      const existingUserWithName = await this.findUserByName(
+        updateUserDto.name,
+      ).catch(() => undefined);
+      if (existingUserWithName && existingUserWithName.id !== userId) {
+        throw new BadRequestException('Name is already registered');
+      }
+      user.name = updateUserDto.name;
+    }
+
+    if (updateUserDto.phone) {
+      user.phone = updateUserDto.phone;
+    }
+
+    await this.userRepository.save(user);
+
     return user;
   }
 }
