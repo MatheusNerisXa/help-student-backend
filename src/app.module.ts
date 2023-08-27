@@ -15,6 +15,7 @@ import { AbsencesModule } from './absences/absences.module';
 import { DisciplineModule } from './discipline/discipline.module';
 import { ExamsModule } from './exams/exams.module';
 import { NewsModule } from './news/news.module';
+import { BannersModule } from './banners/banners.module';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { NewsModule } from './news/news.module';
     DisciplineModule,
     ExamsModule,
     NewsModule,
+    BannersModule,
   ],
   controllers: [],
   providers: [{ provide: APP_GUARD, useClass: RolesGuard }],
