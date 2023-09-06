@@ -7,16 +7,22 @@ import {
   Put,
   UsePipes,
   ValidationPipe,
+  NotFoundException,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/createUser.dto';
 import { ReturnUserDto } from './dtos/returnUser.dto';
 import { UpdateUserDto } from './dtos/updateUser.dto';
 import { UserEntity } from './entities/user.entity';
 import { UserService } from './user.service';
+import { PasswordRecoveryService } from './password-recovery.service';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly passwordRecoveryService: PasswordRecoveryService,
+  ) {}
+
   @UsePipes(ValidationPipe)
   @Post()
   async createUser(@Body() createUser: CreateUserDto): Promise<UserEntity> {
@@ -26,7 +32,7 @@ export class UserController {
   @Get()
   async getAllUser(): Promise<ReturnUserDto[]> {
     return (await this.userService.getAllUser()).map(
-      (UserEntity) => new ReturnUserDto(UserEntity),
+      (userEntity) => new ReturnUserDto(userEntity),
     );
   }
 
@@ -43,5 +49,30 @@ export class UserController {
     @Body() updateUserDto: UpdateUserDto,
   ): Promise<UserEntity> {
     return this.userService.updateUser(userId, updateUserDto);
+  }
+
+  @Post('recover-password')
+  async recoverPassword(@Body() body: { email: string }) {
+    const { email } = body;
+
+    const user = await this.userService.findUserByEmail(email);
+    if (!user) {
+      throw new NotFoundException(`Email: ${email} Not Found`);
+    }
+
+    const newPassword =
+      await this.passwordRecoveryService.generateRandomPassword(10);
+
+    await this.passwordRecoveryService.updateUserPassword(email, newPassword);
+
+    await this.passwordRecoveryService.sendPasswordEmail(
+      user.email,
+      newPassword,
+    );
+
+    return {
+      message:
+        'Senha recuperada com sucesso. Verifique seu email para obter a nova senha.',
+    };
   }
 }
