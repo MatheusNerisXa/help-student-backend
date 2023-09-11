@@ -51,8 +51,8 @@ export class PasswordRecoveryService {
     const mailOptions = {
       from: 'matheusneris2011@gmail.com',
       to: userEmail,
-      subject: 'Recuperação de Senha',
-      text: `Sua nova senha é: ${newPassword}`,
+      subject: 'Recuperação de Senha - HelpStudents',
+      text: `Sua nova senha para acessar o aplicativo HelpStudents é: ${newPassword}`,
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
