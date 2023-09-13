@@ -1,4 +1,11 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  NotFoundException,
+} from '@nestjs/common';
 import { DisciplineService } from './discipline.service';
 import { CreateDisciplineDto } from './dtos/create-discipline.dto';
 import { ReturnDisciplines } from './dtos/return-discipline.dto';
@@ -7,6 +14,18 @@ import { DisciplineEntity } from './entities/discipline.entity';
 @Controller('discipline')
 export class DisciplineController {
   constructor(private readonly disciplineService: DisciplineService) {}
+
+  @Get(':id')
+  async findDisciplineById(
+    @Param('id') id: number,
+  ): Promise<ReturnDisciplines> {
+    const discipline: DisciplineEntity =
+      await this.disciplineService.findDisciplineById(id);
+    if (!discipline) {
+      throw new NotFoundException(`No discipline found with ID: ${id}`);
+    }
+    return new ReturnDisciplines(discipline);
+  }
 
   @Get()
   async findAllAbsences(): Promise<ReturnDisciplines[]> {

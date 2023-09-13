@@ -41,4 +41,11 @@ export class DisciplineService {
 
     return disciplines;
   }
+
+  async findDisciplineById(id: number): Promise<DisciplineEntity | undefined> {
+    const discipline = await this.disciplineRepository.findOne({
+      where: { id },
+    });
+    return discipline;
+  }
 }
