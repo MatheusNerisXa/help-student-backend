@@ -17,9 +17,6 @@ export class AbsencesEntity {
   @Column({ name: 'number_of_absences' })
   numberOfAbsences: number;
 
-  @Column({ name: 'user_id' })
-  userId: number;
-
   @Column({ name: 'discipline_id' })
   disciplineId: number;
 

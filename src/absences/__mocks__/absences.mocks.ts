@@ -5,6 +5,5 @@ export const absencesMock: AbsencesEntity = {
   id: 2,
   disciplineId: 1,
   numberOfAbsences: 12,
-  userId: 1,
   updatedAt: new Date(),
 };
