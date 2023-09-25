@@ -20,6 +20,9 @@ export class AbsencesEntity {
   @Column({ name: 'discipline_id' })
   disciplineId: number;
 
+  @Column({ name: 'reason' })
+  reason: string;
+
   @ManyToMany(() => UserEntity, (user) => user.id)
   user?: UserEntity;
 

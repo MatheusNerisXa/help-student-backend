@@ -37,7 +37,11 @@ export class AbsencesService {
   }
 
   async createAbsence(createAbsenceDto: AbsencesDto): Promise<AbsencesEntity> {
-    const newAbsence = this.absencesRepository.create(createAbsenceDto);
+    const newAbsence = this.absencesRepository.create({
+      ...createAbsenceDto,
+      reason: 'Razão da falta',
+    });
+
     return await this.absencesRepository.save(newAbsence);
   }
 
