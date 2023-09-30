@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 import { DisciplineEntity } from './entities/discipline.entity';
 import { CreateDisciplineDto } from './dtos/create-discipline.dto';
 
@@ -47,5 +47,9 @@ export class DisciplineService {
       where: { id },
     });
     return discipline;
+  }
+
+  async updateDisciplineStatusToFive(id: number): Promise<UpdateResult> {
+    return this.disciplineRepository.update({ id }, { disciplineStatusId: 5 });
   }
 }

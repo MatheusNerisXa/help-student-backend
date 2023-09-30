@@ -2,6 +2,7 @@ import {
   Controller,
   Get,
   Post,
+  Put,
   Body,
   Param,
   NotFoundException,
@@ -10,6 +11,7 @@ import { DisciplineService } from './discipline.service';
 import { CreateDisciplineDto } from './dtos/create-discipline.dto';
 import { ReturnDisciplines } from './dtos/return-discipline.dto';
 import { DisciplineEntity } from './entities/discipline.entity';
+import { UpdateResult } from 'typeorm';
 
 @Controller('discipline')
 export class DisciplineController {
@@ -50,5 +52,12 @@ export class DisciplineController {
     const disciplines: DisciplineEntity[] =
       await this.disciplineService.findDisciplinesByUserId(userId);
     return disciplines.map((discipline) => new ReturnDisciplines(discipline));
+  }
+
+  @Put(':id/update-status')
+  async updateDisciplineStatusToFive(
+    @Param('id') id: number,
+  ): Promise<UpdateResult> {
+    return this.disciplineService.updateDisciplineStatusToFive(id);
   }
 }
