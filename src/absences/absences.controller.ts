@@ -43,7 +43,7 @@ export class AbsencesController {
   @Put(':absenceId')
   async updateAbsence(
     @Param('absenceId') absenceId: number,
-    @Body() updateAbsenceDto: Partial<AbsencesDto>, // Use o Partial para permitir a atualização de campos opcionais
+    @Body() updateAbsenceDto: Partial<AbsencesDto>,
   ): Promise<AbsencesEntity> {
     return this.absencesService.updateAbsence(absenceId, updateAbsenceDto);
   }
