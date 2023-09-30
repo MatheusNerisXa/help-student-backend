@@ -20,6 +20,14 @@ export class AbsencesService {
     return absences;
   }
 
+  async deleteAbsence(absenceId: number): Promise<void> {
+    const result = await this.absencesRepository.delete(absenceId);
+
+    if (result.affected === 0) {
+      throw new NotFoundException(`Absence with ID ${absenceId} not found`);
+    }
+  }
+
   async findAbsencesByDisciplineId(
     disciplineId: number,
   ): Promise<AbsencesEntity[]> {

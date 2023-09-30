@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { AbsencesService } from './absences.service';
 import { AbsencesDto } from './dtos/create-absence.dto';
 import { ReturnAbsences } from './dtos/return-absences.dto';
@@ -30,6 +30,11 @@ export class AbsencesController {
       disciplineId,
     );
     return total;
+  }
+
+  @Delete(':absenceId')
+  async deleteAbsence(@Param('absenceId') absenceId: number): Promise<void> {
+    await this.absencesService.deleteAbsence(absenceId);
   }
 
   @Get(':disciplineId')
