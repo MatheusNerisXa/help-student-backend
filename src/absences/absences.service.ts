@@ -28,6 +28,33 @@ export class AbsencesService {
     }
   }
 
+  async updateAbsence(
+    absenceId: number,
+    updateAbsenceDto: Partial<AbsencesDto>,
+  ): Promise<AbsencesEntity> {
+    const absence = await this.absencesRepository.findOne({
+      where: { id: absenceId },
+    });
+
+    if (!absence) {
+      throw new NotFoundException(`Absence with ID ${absenceId} not found`);
+    }
+
+    if (updateAbsenceDto.reason !== undefined) {
+      absence.reason = updateAbsenceDto.reason;
+    }
+
+    if (updateAbsenceDto.number_of_absences !== undefined) {
+      absence.numberOfAbsences = updateAbsenceDto.number_of_absences;
+    }
+
+    if (updateAbsenceDto.created_at !== undefined) {
+      absence.createdAt = updateAbsenceDto.created_at;
+    }
+
+    return await this.absencesRepository.save(absence);
+  }
+
   async findAbsencesByDisciplineId(
     disciplineId: number,
   ): Promise<AbsencesEntity[]> {

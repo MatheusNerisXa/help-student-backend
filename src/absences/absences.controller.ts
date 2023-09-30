@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { AbsencesService } from './absences.service';
 import { AbsencesDto } from './dtos/create-absence.dto';
 import { ReturnAbsences } from './dtos/return-absences.dto';
@@ -30,6 +38,14 @@ export class AbsencesController {
       disciplineId,
     );
     return total;
+  }
+
+  @Put(':absenceId')
+  async updateAbsence(
+    @Param('absenceId') absenceId: number,
+    @Body() updateAbsenceDto: Partial<AbsencesDto>, // Use o Partial para permitir a atualização de campos opcionais
+  ): Promise<AbsencesEntity> {
+    return this.absencesService.updateAbsence(absenceId, updateAbsenceDto);
   }
 
   @Delete(':absenceId')
