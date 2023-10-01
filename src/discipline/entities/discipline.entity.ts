@@ -4,12 +4,15 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToMany,
+  ManyToOne,
+  OneToMany,
   JoinColumn,
+  ManyToMany,
 } from 'typeorm';
 import { UserEntity } from 'src/user/entities/user.entity';
 import { DisciplineStatusEntity } from 'src/discipline-status/entities/disciplineStatus.entity';
 import { AbsencesEntity } from 'src/absences/entities/absences.entity';
+import { ActivityEntity } from 'src/activities/entities/activities.entity';
 
 @Entity({ name: 'discipline' })
 export class DisciplineEntity {
@@ -34,12 +37,15 @@ export class DisciplineEntity {
   @ManyToMany(() => UserEntity, (user) => user.disciplines)
   user?: UserEntity;
 
-  @ManyToMany(() => DisciplineStatusEntity)
+  @ManyToOne(() => DisciplineStatusEntity)
   @JoinColumn({ name: 'status_discipline_id', referencedColumnName: 'id' })
   disciplineStatus?: DisciplineStatusEntity;
 
-  @ManyToMany(() => AbsencesEntity, (absences) => absences.id)
-  absencesId?: AbsencesEntity[];
+  @OneToMany(() => AbsencesEntity, (absences) => absences.discipline)
+  absences?: AbsencesEntity[];
+
+  @OneToMany(() => ActivityEntity, (activity) => activity.discipline)
+  activities?: ActivityEntity[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

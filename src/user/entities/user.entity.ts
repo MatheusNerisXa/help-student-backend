@@ -1,4 +1,5 @@
 import { AbsencesEntity } from 'src/absences/entities/absences.entity';
+import { ActivityEntity } from 'src/activities/entities/activities.entity';
 import { AddressEntity } from 'src/address/entities/address.entity';
 import { DisciplineEntity } from 'src/discipline/entities/discipline.entity';
 import {
@@ -41,4 +42,7 @@ export class UserEntity {
 
   @OneToMany(() => AbsencesEntity, (absences) => absences.user)
   absences: AbsencesEntity[];
+
+  @OneToMany(() => ActivityEntity, (activity) => activity.user)
+  activities: ActivityEntity[];
 }
