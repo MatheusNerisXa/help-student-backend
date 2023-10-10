@@ -19,7 +19,7 @@ export class FileEntity {
   @Column({ name: 'file_url' })
   fileUrl: string;
 
-  @Column({ name: 'file_description', nullable: true }) // Adicione o campo file_description aqui
+  @Column({ name: 'file_description', nullable: true })
   fileDescription: string | null;
 
   @CreateDateColumn({ name: 'created_at' })
