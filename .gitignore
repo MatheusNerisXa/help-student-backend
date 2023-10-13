@@ -3,6 +3,7 @@
 /node_modules
 /src/files/FilesAndPhotos
 /src/files/ProfileImage
+/src/files/CoursesImage
 # Logs
 logs
 *.log

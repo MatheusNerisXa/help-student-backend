@@ -18,6 +18,7 @@ import { NewsModule } from './news/news.module';
 import { BannersModule } from './banners/banners.module';
 import { ActivitiesModule } from './activities/activities.module';
 import { FilesAndPhotosModule } from './files-and-photos/files-and-photos.module';
+import { CoursesModule } from './courses/courses.module';
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import { FilesAndPhotosModule } from './files-and-photos/files-and-photos.module
     BannersModule,
     ActivitiesModule,
     FilesAndPhotosModule,
+    CoursesModule,
   ],
   controllers: [],
   providers: [{ provide: APP_GUARD, useClass: RolesGuard }],
