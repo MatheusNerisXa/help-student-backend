@@ -45,4 +45,7 @@ export class UserEntity {
 
   @OneToMany(() => ActivityEntity, (activity) => activity.user)
   activities: ActivityEntity[];
+
+  @Column({ name: 'photo_image', nullable: true })
+  photoImage: string;
 }

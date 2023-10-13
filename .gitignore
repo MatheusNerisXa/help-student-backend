@@ -2,7 +2,7 @@
 /dist
 /node_modules
 /src/files/FilesAndPhotos
-
+/src/files/ProfileImage
 # Logs
 logs
 *.log

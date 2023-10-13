@@ -9,6 +9,9 @@ import { CreateUserDto } from './dtos/createUser.dto';
 import { UserEntity } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { v4 as uuidv4 } from 'uuid';
+import * as fs from 'fs';
+import { promisify } from 'util';
 
 @Injectable()
 export class UserService {
@@ -42,6 +45,28 @@ export class UserService {
       typeUser: 1,
       password: passwordHash,
     });
+  }
+
+  async updateProfileImage(userId: number, file: any): Promise<UserEntity> {
+    const user = await this.findUserById(userId);
+
+    const uploadDirectory = 'src/files/ProfileImage';
+
+    if (!fs.existsSync(uploadDirectory)) {
+      fs.mkdirSync(uploadDirectory, { recursive: true });
+    }
+
+    const filename = `${uuidv4()}-${file.originalname}`;
+    const filePath = `${uploadDirectory}/${filename}`;
+
+    const fileStream = fs.createWriteStream(filePath);
+
+    await promisify(fileStream.end.bind(fileStream))(file.buffer);
+
+    user.photoImage = filePath;
+    await this.userRepository.save(user);
+
+    return user;
   }
 
   async getUserByIdUsingRelations(userId: number): Promise<UserEntity> {

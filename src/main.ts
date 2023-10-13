@@ -5,7 +5,8 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
 
-  app.use('/static', express.static('src/files/FilesAndPhotos')); // Substitua 'src/files/FilesAndPhotos' pelo seu diretório real
+  app.use('/static', express.static('src/files/FilesAndPhotos'));
+  app.use('/static', express.static('src/files/ProfileImage'));
 
   await app.listen(8080);
 }
