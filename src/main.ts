@@ -8,6 +8,7 @@ async function bootstrap() {
   app.use('/static', express.static('src/files/FilesAndPhotos'));
   app.use('/static', express.static('src/files/ProfileImage'));
   app.use('/static', express.static('src/files/CoursesImage'));
+  app.use('/static', express.static('src/files/IasImage'));
 
   await app.listen(8080);
 }

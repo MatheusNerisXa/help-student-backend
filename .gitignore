@@ -4,6 +4,7 @@
 /src/files/FilesAndPhotos
 /src/files/ProfileImage
 /src/files/CoursesImage
+/src/files/IasImage
 # Logs
 logs
 *.log
