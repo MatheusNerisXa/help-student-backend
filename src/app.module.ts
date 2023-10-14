@@ -21,6 +21,7 @@ import { FilesAndPhotosModule } from './files-and-photos/files-and-photos.module
 import { CoursesModule } from './courses/courses.module';
 import { VideoLessonsModule } from './video-lessons/video-lessons.module';
 import { IaModule } from './ias/ias.module';
+import { JobsModule } from './jobs/jobs.module';
 
 @Module({
   imports: [
@@ -56,6 +57,7 @@ import { IaModule } from './ias/ias.module';
     CoursesModule,
     VideoLessonsModule,
     IaModule,
+    JobsModule,
   ],
   controllers: [],
   providers: [{ provide: APP_GUARD, useClass: RolesGuard }],
