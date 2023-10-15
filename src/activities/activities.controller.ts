@@ -40,6 +40,12 @@ export class ActivitiesController {
   ): Promise<ActivityEntity[]> {
     return this.activitiesService.findActivitiesByDisciplineId(disciplineId);
   }
+  @Get('user/:userId/pending')
+  async findPendingActivitiesByUserId(
+    @Param('userId') userId: number,
+  ): Promise<ActivityEntity[]> {
+    return this.activitiesService.findPendingActivitiesByUserId(userId);
+  }
 
   @Get('user/:userId')
   async findActivitiesByUserId(

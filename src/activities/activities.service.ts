@@ -46,6 +46,16 @@ export class ActivitiesService {
     return activities;
   }
 
+  async findPendingActivitiesByUserId(
+    userId: number,
+  ): Promise<ActivityEntity[]> {
+    const pendingActivities = await this.activitiesRepository.find({
+      where: { user: { id: userId }, isCompleted: false },
+    });
+
+    return pendingActivities;
+  }
+
   async findActivitiesByUserId(userId: number): Promise<ActivityEntity[]> {
     const activities = await this.activitiesRepository.find({
       where: { user: { id: userId } },
