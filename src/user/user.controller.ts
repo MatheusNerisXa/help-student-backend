@@ -65,7 +65,7 @@ export class UserController {
           '',
         );
 
-        const profileImageURL = `http://192.168.1.7:8080/static/${profileImageFileName}`;
+        const profileImageURL = `http://192.168.1.11:8080/static/${profileImageFileName}`;
 
         return {
           ProfileImage: profileImageURL,

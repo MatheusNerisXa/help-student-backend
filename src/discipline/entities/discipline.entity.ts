@@ -52,4 +52,37 @@ export class DisciplineEntity {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  @Column({ name: 'room', nullable: true })
+  room: string;
+
+  @Column({ name: 'min_grade', type: 'float', nullable: true })
+  minGrade: number;
+
+  @Column({ name: 'max_absences', type: 'float', nullable: true })
+  maxAbsences: number;
+
+  @Column({ name: 'hour', nullable: true })
+  hour: string;
+
+  @Column({ name: 'monday', default: false })
+  monday: boolean;
+
+  @Column({ name: 'tuesday', default: false })
+  tuesday: boolean;
+
+  @Column({ name: 'wednesday', default: false })
+  wednesday: boolean;
+
+  @Column({ name: 'thursday', default: false })
+  thursday: boolean;
+
+  @Column({ name: 'friday', default: false })
+  friday: boolean;
+
+  @Column({ name: 'saturday', default: false })
+  saturday: boolean;
+
+  @Column({ name: 'sunday', default: false })
+  sunday: boolean;
 }
