@@ -15,4 +15,8 @@ export class CreateDisciplineDto {
   friday: boolean;
   saturday: boolean;
   sunday: boolean;
+  teacher: string;
+  gradeWeight1: number;
+  gradeWeight2: number;
+  assignmentsWeight: number;
 }

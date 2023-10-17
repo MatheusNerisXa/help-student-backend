@@ -18,6 +18,10 @@ export class ReturnDisciplines {
   friday: boolean;
   saturday: boolean;
   sunday: boolean;
+  teacher: string;
+  gradeWeight1: number;
+  gradeWeight2: number;
+  assignmentsWeight: number;
 
   constructor(disciplineEntity: DisciplineEntity) {
     this.id = disciplineEntity.id;
@@ -37,5 +41,9 @@ export class ReturnDisciplines {
     this.friday = disciplineEntity.friday;
     this.saturday = disciplineEntity.saturday;
     this.sunday = disciplineEntity.sunday;
+    this.teacher = disciplineEntity.teacher;
+    this.gradeWeight1 = disciplineEntity.gradeWeight1;
+    this.gradeWeight2 = disciplineEntity.gradeWeight2;
+    this.assignmentsWeight = disciplineEntity.assignmentsWeight;
   }
 }

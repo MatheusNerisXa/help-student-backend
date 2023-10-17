@@ -2,12 +2,12 @@ import { DisciplineEntity } from '../entities/discipline.entity';
 
 export const disciplineMock: DisciplineEntity = {
   id: 1,
-  name: 'Programação I',
+  name: 'Programming I',
   disciplineStatusId: 1,
   userId: 1,
   dateStart: new Date(2023, 0, 1),
   dateEnd: new Date(2023, 0, 30),
-  room: 'Sala 101',
+  room: 'Room 101',
   minGrade: 5.0,
   maxAbsences: 3.0,
   hour: '10:00 AM',
@@ -20,4 +20,8 @@ export const disciplineMock: DisciplineEntity = {
   sunday: false,
   createdAt: new Date(),
   updatedAt: new Date(),
+  teacher: 'Teste',
+  gradeWeight1: 0.5,
+  gradeWeight2: 0.5,
+  assignmentsWeight: 0.0,
 };

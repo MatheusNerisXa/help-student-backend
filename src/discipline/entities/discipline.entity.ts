@@ -85,4 +85,16 @@ export class DisciplineEntity {
 
   @Column({ name: 'sunday', default: false })
   sunday: boolean;
+
+  @Column({ name: 'teacher', nullable: true })
+  teacher: string;
+
+  @Column({ name: 'gradeweight1', type: 'float', nullable: false })
+  gradeWeight1: number;
+
+  @Column({ name: 'gradeweight2', type: 'float', nullable: false })
+  gradeWeight2: number;
+
+  @Column({ name: 'assignmentsweight', type: 'float', nullable: false })
+  assignmentsWeight: number;
 }
