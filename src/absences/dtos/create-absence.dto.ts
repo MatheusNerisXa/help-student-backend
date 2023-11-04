@@ -5,6 +5,7 @@ export class AbsencesDto {
   reason: string;
   created_at: Date;
   updated_at: Date;
+  date: Date;
 
   constructor(data: Partial<AbsencesDto>) {
     Object.assign(this, data);

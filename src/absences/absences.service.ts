@@ -52,6 +52,10 @@ export class AbsencesService {
       absence.createdAt = updateAbsenceDto.created_at;
     }
 
+    if (updateAbsenceDto.date !== undefined) {
+      absence.date = updateAbsenceDto.date;
+    }
+
     return await this.absencesRepository.save(absence);
   }
 

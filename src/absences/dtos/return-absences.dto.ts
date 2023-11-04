@@ -6,6 +6,7 @@ export class ReturnAbsences {
   discipline_id: number;
   reason: string;
   created_at: Date;
+  date: Date;
 
   constructor(absencesEntity: AbsencesEntity) {
     this.id = absencesEntity.id;
@@ -13,5 +14,6 @@ export class ReturnAbsences {
     this.discipline_id = absencesEntity.disciplineId;
     this.reason = absencesEntity.reason;
     this.created_at = absencesEntity.createdAt;
+    this.date = absencesEntity.date;
   }
 }

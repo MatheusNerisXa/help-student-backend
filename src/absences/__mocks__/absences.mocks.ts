@@ -7,4 +7,5 @@ export const absencesMock: AbsencesEntity = {
   disciplineId: 1,
   numberOfAbsences: 12,
   updatedAt: new Date(),
+  date: new Date(),
 };

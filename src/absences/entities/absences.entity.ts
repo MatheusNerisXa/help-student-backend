@@ -29,6 +29,9 @@ export class AbsencesEntity {
   @ManyToMany(() => DisciplineEntity, (discipline) => discipline.id)
   discipline?: DisciplineEntity;
 
+  @Column({ name: 'date' })
+  date: Date;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
