@@ -4,11 +4,12 @@ import { UserService } from './user.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from './entities/user.entity';
 import { PasswordRecoveryService } from './password-recovery.service';
+import { WelcomeEmailService } from './welcome-email.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity])],
   controllers: [UserController],
-  providers: [UserService, PasswordRecoveryService],
+  providers: [UserService, PasswordRecoveryService, WelcomeEmailService],
   exports: [UserService],
 })
 export class UserModule {}

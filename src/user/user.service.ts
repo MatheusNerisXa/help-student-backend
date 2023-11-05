@@ -12,12 +12,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { v4 as uuidv4 } from 'uuid';
 import * as fs from 'fs';
 import { promisify } from 'util';
+import { WelcomeEmailService } from './welcome-email.service'; // Importe o serviço de email de boas-vindas
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
+    private readonly welcomeEmailService: WelcomeEmailService, // Injete o serviço de email de boas-vindas
   ) {}
 
   async createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
@@ -40,11 +42,16 @@ export class UserService {
     const saltOrRounds = 10;
     const passwordHash = await hash(createUserDto.password, saltOrRounds);
 
-    return this.userRepository.save({
+    const newUser = await this.userRepository.save({
       ...createUserDto,
       typeUser: 1,
       password: passwordHash,
     });
+
+    // Após criar o usuário com sucesso, envie o email de boas-vindas
+    await this.welcomeEmailService.sendWelcomeEmail(newUser);
+
+    return newUser;
   }
 
   async updateProfileImage(userId: number, file: any): Promise<UserEntity> {
